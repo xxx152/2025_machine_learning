@@ -32,18 +32,18 @@ Second, define
 ```math
 F_{p,h}(x) = \sum_{i=0}^{p}​ (−1)^{p−i}\left( \begin{array}{c} p \\ i \end{array} \right) tanh((p/2-i)hx) 
 ```
-then Taylor's expansion \$tanh(x)\$ at \$x=(p/2-i)\$ gives
+then Taylor's expansion \$tanh(u)\$ at \$u=(p/2-i)hx\$ gives
 ```math
-F_{p,h}(x) = \sum_{i=0}^{p}​ (−1)^{p−i}\left( \begin{array}{c} p \\ i \end{array} \right) \sum_{j=1}^{\infty}c_{j}((p/2-i)hx)^{j} 
+F_{p,h}(x) = \sum_{i=0}^{p}​ (−1)^{p−i}\left( \begin{array}{c} p \\ i \end{array} \right) \sum_{j=1}^{\infty}c_{j}[(p/2-i)hx]^{j} 
 ```
 for some \$c_j \in \mathbb{R} \$
 ```math
-F_{p,h}(x) = \sum_{j=1}^{\infty}c_{j}(hx)^{j} \sum_{i=0}^{p}​ (−1)^{p−i}\left( \begin{array}{c} p \\ i \end{array} \right) ((p/2-i))^{j} 
+F_{p,h}(x) = \sum_{j=1}^{\infty}c_{j}(hx)^{j} \sum_{i=0}^{p}​ (−1)^{p−i}\left( \begin{array}{c} p \\ i \end{array} \right) (p/2-i)^{j} 
 ```
 By the finite difference identity, all terms with \$j < p\$ vanish.  
 Hence the first nonzero contribution is the $j=p$ term, which is proportional to \$x^p\$.  
 ```math
-F_{p,h}(x) = C_p​(hx)^p+(higher-order terms)
+F_{p,h}(x) = C_{p}​(hx)^{p}+(higher-order-terms)
 ```
 where \$C_p \neq 0\$ is a constant depending only on \$p\$ and the Taylor coefficient \$c_p\$.  
 Dividing both sides by \$C_p h^p\$ yields
