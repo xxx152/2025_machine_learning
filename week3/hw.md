@@ -54,4 +54,49 @@ All higher-order terms (\$j > p\$) contribute to the approximation error, which 
 Since these terms are multiplied by higher powers of $h$, the error can be made arbitrarily small by choosing $h$ sufficiently small.
 
 
+## lemma 3.2
+Let \$k \in \mathbb{N}_0\$ and \$s \in 2\mathbb{N}-1\$. Then, for every \$\varepsilon > 0\$, 
+there exists a shallow \$\tanh\$ neural network
+```math
+\Psi_{s,\varepsilon} : [-M, M] \to \mathbb{R}^{s}
+```
+of width \$\tfrac{3(s+1)}{2}\$ such that, for all odd integers \$p \leq s\$,
+```math
+y^p \;\cong\; \Psi_{s,\varepsilon}(y),
+```
+with approximation error bounded by $\varepsilon\$.
+
+## Idea of Proof (Lemma 3.2)
+
+The goal is to show that **both odd and even powers of $y$** can be well-approximated by the network \$\Psi_{s,\varepsilon}\$.  
+**1. Odd powers**  
+From Lemma 3.1, we know that for all odd integers \$p \leq s\$,
+```math
+y^p \cong \Psi_{s,\varepsilon}(y)
+```
+with approximation error at most $\varepsilon$.  
+**2. Expressing even powers**  
+To approximate even monomials $y^{2n}$, we use the identity
+```math
+   \frac{1}{y^{2n}} \;=\; 
+   \frac{1}{2\alpha(2n+1)} \Big[ (y+\alpha)^{2n+1} - (y-\alpha)^{2n+1} 
+   - \sum_{k=0}^{n-1} \binom{2n+1}{2k} \alpha^{2(n-k)+1} y^{2k} \Big],
+```
+   valid for $\alpha > 0$.  
+   This expresses $y^{2n}$ in terms of odd powers $(y\pm \alpha)^{2n+1}$ and lower even powers $y^{2k}$.
+
+
+This gives a recursive way to build \$y^{2n}\$ step by step from odd powers and smaller even powers.  
+**3. Induction step**  
+   - Base case: Using the recursion with $n=1$, \$y^2\$ can be expressed directly from odd powers (which are approximated via Lemma 3.1).  
+   Hence \$y^2\$ can be approximated to within error $O(\varepsilon)$.  
+   - Inductive step: Assume we already have approximations for all even powers up to \$y^{2(n-1)}\$.  
+The recursion formula expresses $y^{2n}$ using odd powers (approximated via Lemma 3.1) and these lower even powers (available by induction).  
+Substituting the approximations, we obtain an approximation for \$y^{2n}\$ with error still bounded by \$O(\varepsilon)\$.
+   as stated in Lemma 3.2.
+```math
+y^p \;\cong\; \Psi_{s,\varepsilon}(y), \quad \forall p \leq s
+```
+
+
 
