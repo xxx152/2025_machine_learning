@@ -20,7 +20,7 @@ and its \$p\$-th iteration
 ```math
 \triangle^{p}f(0)=\sum_{i=0}^{p}​ (−1)^{p−i}\left( \begin{array}{c} p \\ i \end{array} \right) f(i).
 ```
-This identity can be proved by induction.
+This identity can be proved by induction.  
 Now, for monomials $f(x)=x^k$, with \$k\in\mathbb{N}\$, one obtains
 ```math
 \triangle^{p}f(0)=\left\{ \begin{array}{rcl}
@@ -40,10 +40,18 @@ for some \$c_j \in \mathbb{R} \$
 ```math
 F_{p,h}(x) = \sum_{j=1}^{\infty}c_{j}(hx)^{j} \sum_{i=0}^{p}​ (−1)^{p−i}\left( \begin{array}{c} p \\ i \end{array} \right) ((p/2-i))^{j} 
 ```
-By the finite difference identity, all terms with \$j < p\$ vanish.
-Hence the first nonzero contribution is the $j=p$ term, which is proportional to \$x^p\$.
+By the finite difference identity, all terms with \$j < p\$ vanish.  
+Hence the first nonzero contribution is the $j=p$ term, which is proportional to \$x^p\$.  
+```math
+F_{p,h}(x) = C_p​(hx)^p+(higher-order terms)
+```
+where \$C_p \neq 0\$ is a constant depending only on \$p\$ and the Taylor coefficient \$c_p\$.  
+Dividing both sides by \$C_p h^p\$ yields
+```math
+x^p \cong F_{p,h}(x)/C_p h^p
+```
 All higher-order terms (\$j > p\$) contribute to the approximation error, which can be controlled by choosing \$h\$ small enough.
-
+Since these terms are multiplied by higher powers of $h$, the error can be made arbitrarily small by choosing $h$ sufficiently small.
 
 
 
