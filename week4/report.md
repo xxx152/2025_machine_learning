@@ -22,9 +22,9 @@
 
 ## 3. 訓練過程與結果分析
 ### 3.1 訓練歷程
-- 分類：BCE 損失穩定下降；測試準確率自約 94% 逐步提昇並在 100 epoch 收斂於 98% 左右（Figure 2 左、右）。
+- 分類：BCE 損失穩定下降；測試準確率自約 94% 逐步提昇並在 25 epoch 收斂於 98% 左右（Figure 2 左、右）。
   ![Figure_2](https://github.com/xxx152/2025_machine_learning/blob/main/week4/img/image%20copy.png)
-- 回歸：訓練 MSE 隨 epoch 持續下降，10 epoch 時趨於平穩（Figure 4 左）。
+- 回歸：訓練 MSE 隨 epoch 持續下降，15 epoch 時趨於平穩（Figure 4 左）。
   ![Figure_2](https://github.com/xxx152/2025_machine_learning/blob/main/week4/img/image%20copy%203.png)
 ### 3.2 測試表現
 | 指標	| ClassificationNet	| RegressionNet |
@@ -47,7 +47,6 @@
 - Figure 6：回歸模型在全網格補齊溫度預測，NaN 位置保留空白，提供地理對應的溫度分布。  
   ![Figure_1](https://github.com/xxx152/2025_machine_learning/blob/main/week4/img/image%20copy%204.png)
 ## 4. 討論與結論
-- 資料轉換完整：成功從 XML 解析出 67×120 網格，將 -999. 轉為 NaN，並以經緯度解析度組成空間網格。
 - 分類模型  
 優點：準確率達 98%，可以看出本島位置。  
 限制：離島沒辦法有效分類。
