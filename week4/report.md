@@ -1,26 +1,26 @@
-氣象格點觀測資料分析報告
+## 氣象格點觀測資料分析報告
 1. 資料來源與前處理
-資料格式：原始 XML 以 67 × 120 的格點呈現，每格代表一筆攝氏溫度觀測值。
-座標定義：左下角為東經 120.00°、北緯 21.88°；經緯度解析度皆為 0.03°。先沿經向填入 67 筆，再沿緯向堆疊 120 列。
-資料清理：
+- 資料格式：原始 XML 以 67 × 120 的格點呈現，每格代表一筆攝氏溫度觀測值。
+- 座標定義：左下角為東經 120.00°、北緯 21.88°；經緯度解析度皆為 0.03°。先沿經向填入 67 筆，再沿緯向堆疊 120 列。
+- 資料清理：
 將 -999. 標示的無效值轉為 NaN，並在視覺化與回歸預測時保留遮罩。
 建立 temp_grid 方便繪製觀測熱度圖（Figure 1）。
-特徵工程：
+- 特徵工程：
 將經、緯度索引視為數值特徵。
-建立兩個資料集：
+- 建立兩個資料集：
 分類：特徵 (lon_idx, lat_idx)，標籤為有效/無效。
 回歸：僅保留有效觀測，目標為溫度值。
 透過 StandardScaler 對特徵做 Z-score 標準化，並以 80/20 切分訓練與測試集；分類資料採 stratify 維持類別比例。
 2. 模型設計
 2.1 ClassificationNet
-架構：BatchNorm1d(2) → Linear 2→128 → ReLU → Dropout 0.2 → Linear 128→64 → ReLU → Dropout 0.2 → Linear 64→16 → ReLU → Dropout 0.1 → Linear 16→1。
-損失與最佳化：BCEWithLogitsLoss + Adam (lr=1e-3)。
-訓練參數：批次 256，訓練 200 epoch，4.24M 參數。
+- 架構：BatchNorm1d(2) → Linear 2→128 → ReLU → Dropout 0.2 → Linear 128→64 → ReLU → Dropout 0.2 → Linear 64→16 → ReLU → Dropout 0.1 → Linear 16→1。
+- 損失與最佳化：BCEWithLogitsLoss + Adam (lr=1e-3)。
+- 訓練參數：批次 256，訓練 200 epoch，4.24M 參數。
 2.2 RegressionNet
-架構：BatchNorm1d(2) → Linear 2→128 → ReLU → Dropout 0.2 → Linear 128→128 → ReLU → Dropout 0.2 → Linear 128→32 → ReLU → Dropout 0.1 → Linear 32→1。
-損失與最佳化：MSELoss + Adam (lr=1e-3)。
-訓練參數：批次 256，訓練 300 epoch，5.44M 參數。
-兩模型皆在第一層加入 Batch Normalization，搭配 Dropout 控制過擬合。
+- 架構：BatchNorm1d(2) → Linear 2→128 → ReLU → Dropout 0.2 → Linear 128→128 → ReLU → Dropout 0.2 → Linear 128→32 → ReLU → Dropout 0.1 → Linear 32→1。
+- 損失與最佳化：MSELoss + Adam (lr=1e-3)。
+- 訓練參數：批次 256，訓練 300 epoch，5.44M 參數。
+- 兩模型皆在第一層加入 Batch Normalization，搭配 Dropout 控制過擬合。
 
 3. 訓練過程與結果分析
 3.1 訓練歷程
